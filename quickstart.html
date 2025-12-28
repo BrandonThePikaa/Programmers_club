@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quick Start</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Welcome</a>
+  <a href="quickstart.html">Quick Start</a>
+  <a href="cheatsheet.html">Cheat Sheet</a>
+  <a href="meetings.html">Meetings</a>
+  <a href="practice.html">Practice</a>
+  <a href="https://www.lexaloffle.com/pico-8.php" target="_blank">Docs</a>
+</nav>
+
+<main>
+  <h1>Quick Start</h1>
+
+  <section>
+    <h2>Minimal PICO-8 Program</h2>
+    <pre><code>
+x = 64
+y = 64
+
+function _update()
+  if btn(0) then x -= 1 end
+  if btn(1) then x += 1 end
+  if btn(2) then y -= 1 end
+  if btn(3) then y += 1 end
+end
+
+function _draw()
+  cls()
+  rectfill(x, y, x+8, y+8, 7)
+end
+    </code></pre>
+  </section>
+
+  <section>
+    <h2>How to run it</h2>
+    <p>
+      Paste this into PICO-8. Press <strong>Run</strong>. Move the box.
+    </p>
+  </section>
+
+  <section>
+    <h2>How it works (human version)</h2>
+    <p><strong>_update()</strong> is where the game thinks.</p>
+    <p><strong>_draw()</strong> is where the game shows.</p>
+  </section>
+</main>
+
+</body>
+</html>
