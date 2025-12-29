@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cheat Sheet</title>
+  <title>PICO-8 Cheat Sheet</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,35 +12,231 @@
   <a href="cheatsheet.html">Cheat Sheet</a>
   <a href="meetings.html">Meetings</a>
   <a href="practice.html">Practice</a>
-  <a href="https://www.lexaloffle.com/pico-8.php" target="_blank">Docs</a>
+  <a href="https://www.lexaloffle.com/pico-8.php?page=resources" target="_blank">Docs</a>
 </nav>
 
 <main>
-  <h1>Cheat Sheet</h1>
+  <h1>PICO-8 Cheat Sheet</h1>
 
+  <!-- Game Structure -->
   <section>
-    <h2>Syntax</h2>
+    <h2>Game Structure</h2>
     <pre><code>
-if condition then
-  -- code
+function _init()   -- runs once at start
+end
+
+function _update() -- runs every frame (30fps)
+end
+
+function _draw()   -- runs every frame, after _update
+end
+    </code></pre>
+    <p><strong>_init()</strong>: setup variables<br>
+       <strong>_update()</strong>: game logic, input<br>
+       <strong>_draw()</strong>: visuals and UI</p>
+  </section>
+
+  <!-- Variables & Types -->
+  <section>
+    <h2>Variables & Types</h2>
+    <pre><code>
+x = 10
+name = "bob"
+alive = true
+player = {x=10, y=20, hp=10}
+    </code></pre>
+    <p>Lua is dynamic typed. Use tables for objects and lists.</p>
+  </section>
+
+  <!-- Operators -->
+  <section>
+    <h2>Operators</h2>
+    <pre><code>
++ - * / %       -- arithmetic
+== != < > <= >=  -- comparison
+and or not      -- logic
+= += -= *= /=    -- assignment shorthand
+    </code></pre>
+  </section>
+
+  <!-- Control Flow -->
+  <section>
+    <h2>Control Flow</h2>
+    <pre><code>
+-- if statement
+if x>10 then
+  y += 1
+elseif x>5 then
+  y += 0
+else
+  y -= 1
+end
+
+-- for loop
+for i=1,10 do
+  print(i)
+end
+
+-- while loop
+while x<10 do
+  x += 1
 end
     </code></pre>
   </section>
 
+  <!-- Functions -->
   <section>
-    <h2>Movement Pattern</h2>
+    <h2>Functions</h2>
     <pre><code>
-x += vx
-y += vy
+function add(a,b)
+  return a+b
+end
+
+z = add(3,4)
     </code></pre>
   </section>
 
+  <!-- Tables -->
   <section>
-    <h2>Collision (box)</h2>
-    <p>
-      Two boxes collide if they overlap on both X and Y.
-    </p>
+    <h2>Tables (arrays/objects)</h2>
+    <pre><code>
+player = {x=10, y=20, hp=10} -- object
+enemies = {}
+add(enemies, {x=10, y=5})
+for e in all(enemies) do
+  e.y += 1
+end
+    </code></pre>
+    <p>Use <code>all(t)</code> to iterate, <code>add(t,val)</code> to append, <code>del(t,val)</code> to remove.</p>
   </section>
+
+  <!-- Input -->
+  <section>
+    <h2>Input</h2>
+    <pre><code>
+btn(0) -- left
+btn(1) -- right
+btn(2) -- up
+btn(3) -- down
+btn(4) -- X
+btn(5) -- O
+
+btnp(4) -- pressed this frame
+btnr(4) -- released this frame
+    </code></pre>
+  </section>
+
+  <!-- Drawing -->
+  <section>
+    <h2>Drawing</h2>
+    <pre><code>
+cls()                   -- clear screen
+rect(x1,y1,x2,y2,color) -- outline rectangle
+rectfill(x1,y1,x2,y2,color) -- filled rectangle
+circ(x,y,r,color)
+circfill(x,y,r,color)
+line(x1,y1,x2,y2,color)
+print("text", x, y, color)
+    </code></pre>
+    <p>Colors: 0-15</p>
+  </section>
+
+  <!-- Sprites -->
+  <section>
+    <h2>Sprites</h2>
+    <pre><code>
+spr(n, x, y, w=1, h=1, flip_x=false, flip_y=false)
+-- n = sprite index
+-- w,h = tiles wide/tall
+spr(1, player.x, player.y)
+    </code></pre>
+  </section>
+
+  <!-- Collision -->
+  <section>
+    <h2>Collision (rectangle)</h2>
+    <pre><code>
+function collide(a,b)
+  return not (
+    a.x+a.w < b.x or
+    a.x > b.x+b.w or
+    a.y+a.h < b.y or
+    a.y > b.y+b.h
+  )
+end
+    </code></pre>
+  </section>
+
+  <!-- Math & Random -->
+  <section>
+    <h2>Math & Random</h2>
+    <pre><code>
+abs(x)
+sqrt(x)
+sin(x)
+cos(x)
+flr(x)  -- floor
+rnd(n)  -- random 0..n
+rnd()   -- 0..1
+    </code></pre>
+  </section>
+
+  <!-- Audio -->
+  <section>
+    <h2>Audio</h2>
+    <pre><code>
+sfx(n)   -- play sound effect
+music(n) -- play music track
+    </code></pre>
+  </section>
+
+  <!-- Game States -->
+  <section>
+    <h2>Game States</h2>
+    <pre><code>
+state="menu"
+function _update()
+  if state=="menu" and btnp(4) then state="play"
+  elseif state=="play" then
+    -- game logic
+  end
+end
+    </code></pre>
+  </section>
+
+  <!-- Quick Mini-Patterns -->
+  <section>
+    <h2>Quick Mini-Patterns</h2>
+    <pre><code>
+-- Move player
+if btn(0) then x-=2 end
+if btn(1) then x+=2 end
+if btn(2) then y-=2 end
+if btn(3) then y+=2 end
+
+-- Spawn multiple enemies
+enemies={}
+add(enemies,{x=rnd(120),y=0,w=6,h=6})
+for e in all(enemies) do e.y+=2 end
+
+-- Score display
+score = 0
+score +=1
+print("score: "..score,2,2,7)
+    </code></pre>
+  </section>
+
+  <!-- Debugging -->
+  <section>
+    <h2>Debugging Tips</h2>
+    <ul>
+      <li>Use <code>print(var)</code> to inspect values</li>
+      <li>Use <code>cls()</code> to clear screen</li>
+      <li>Draw bounding boxes to check collision</li>
+      <li>Step through one feature at a time</li>
+    </ul>
+  </section>
+
 </main>
 
 </body>
