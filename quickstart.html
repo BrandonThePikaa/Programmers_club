@@ -12,44 +12,77 @@
   <a href="cheatsheet.html">Cheat Sheet</a>
   <a href="meetings.html">Meetings</a>
   <a href="practice.html">Practice</a>
-  <a href="https://www.lexaloffle.com/pico-8.php" target="_blank">Docs</a>
+  <a href="https://www.lexaloffle.com/pico-8.php?page=resources" target="_blank">Docs</a>
 </nav>
 
 <main>
   <h1>Quick Start</h1>
 
   <section>
-    <h2>Minimal PICO-8 Program</h2>
-    <pre><code>
-x = 64
-y = 64
-
-function _update()
-  if btn(0) then x -= 1 end
-  if btn(1) then x += 1 end
-  if btn(2) then y -= 1 end
-  if btn(3) then y += 1 end
-end
-
-function _draw()
-  cls()
-  rectfill(x, y, x+8, y+8, 7)
-end
-    </code></pre>
+    <h2>Step 1: Access Pico-8</h2>
+    <ol>
+      <li>Go to <a href="https://www.pico-8-edu.com/" target="_blank">https://www.pico-8-edu.com/</a></li>
+      <li>Press the <strong>Play</strong> button</li>
+      <li>You should now see the Pico-8 interface</li>
+    </ol>
   </section>
 
   <section>
-    <h2>How to run it</h2>
+    <h2>Step 2: Running Code</h2>
+    <ol>
+      <li>You can switch between the console and IDE by pressing <strong>ESC</strong> </li>
+      <li>To load a file, type: <code>LOAD FILENAME.P8</code> (replace <code>FILENAME</code> with the file name)</li>
+      <li>To run the code, type: <code>RUN</code></li>
+      <li>To end a program, press <strong>ESC</strong> again to return to the console</li>
+      <li>To edit code, press: <code>ESC</code></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Step 3: Try Your First Program</h2>
+    <p>Type this directly into the console and press <strong>Enter</strong>:</p>
+    <pre><code>print("Hello world!")</code></pre>
+
+    <details>
+      <summary>What this does</summary>
+      <ul>
+        <li><code>print()</code> → Tells Pico-8 to display text on the screen</li>
+        <li><code>"Hello world!"</code> → The text to display (must be in quotes)</li>
+        <li><strong>Enter</strong> → Runs the command you typed</li>
+      </ul>
+    </details>
+  </section>
+
+  <section>
+    <h2>Step 4: Make it Interactive</h2>
+    <p>Try this next one in the console:</p>
+    <pre><code>x = 64
+y = 64
+print("Your character is at", x, y)</code></pre>
+
+    <details>
+      <summary>Explanation</summary>
+      <ul>
+        <li><code>x = 64</code> → Creates a variable <code>x</code> and sets it to 64</li>
+        <li><code>y = 64</code> → Creates a variable <code>y</code> and sets it to 64</li>
+        <li><code>print("Your character is at", x, y)</code> → Shows text plus the current values of <code>x</code> and <code>y</code></li>
+      </ul>
+    </details>
+  </section>
+
+  <section> 
+    <h2>Step 5: Next Steps</h2>
     <p>
-      Paste this into PICO-8. Press <strong>Run</strong>. Move the box.
+      Once you can see your first printed text and variables:
+      <ul>
+        <li>Press <strong>ESC</strong> to open the code editor</li>
+        <li>Type `_update()` and `_draw()` stubs (you'll learn these in the first club meeting)</li>
+        <li>Run small changes and see what happens</li>
+        <li>Experiment with changing numbers and text</li>
+      </ul>
     </p>
   </section>
 
-  <section>
-    <h2>How it works (human version)</h2>
-    <p><strong>_update()</strong> is where the game thinks.</p>
-    <p><strong>_draw()</strong> is where the game shows.</p>
-  </section>
 </main>
 
 </body>
