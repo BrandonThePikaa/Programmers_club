@@ -1,51 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: 'Press Start 2P', monospace;
   background: #0e0e0e;
   color: #eaeaea;
   line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: repeating-linear-gradient(
+    rgba(255,255,255,0.03) 0 1px,
+    transparent 1px 2px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Glowing background grid */
+body::after {
+  content: "";
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background-image: linear-gradient(#111 1px, transparent 1px), 
+                    linear-gradient(90deg, #111 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Navigation bar */
 nav {
-  background: #111;
-  padding: 12px 20px;
   display: flex;
-  gap: 16px;
-  border-bottom: 1px solid #222;
+  justify-content: center;
+  background: #1a1a1a;
+  padding: 12px 0;
+  border-bottom: 2px solid #00ffcc;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 nav a {
-  color: #7bdcff;
+  color: #00ffcc;
   text-decoration: none;
-  font-weight: 500;
+  margin: 0 12px;
+  font-size: 12px;
+  transition: all 0.2s ease;
 }
 
 nav a:hover {
-  text-decoration: underline;
+  color: #ff77ff;
+  text-shadow: 0 0 8px #ff77ff;
+  transform: scale(1.1);
 }
 
+/* Main content area */
 main {
   max-width: 900px;
-  padding: 32px 20px;
-  margin: auto;
+  margin: 40px auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
 }
 
-h1, h2, h3 {
-  color: #ffffff;
+/* Headings with pulse animation */
+h1 {
+  color: #ffcc00;
+  text-align: center;
+  text-shadow: 0 0 8px #ffcc00;
+  animation: glow-pulse 2s infinite alternate;
 }
 
-code, pre {
-  background: #1b1b1b;
-  padding: 8px;
-  border-radius: 6px;
-  display: block;
-  overflow-x: auto;
+h2 {
+  color: #00ffff;
+  text-shadow: 0 0 6px #00ffff;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  animation: glow-pulse 3s infinite alternate;
 }
 
-pre {
-  margin: 16px 0;
+@keyframes glow-pulse {
+  0% { text-shadow: 0 0 4px currentColor; }
+  100% { text-shadow: 0 0 12px currentColor; }
 }
 
+/* Paragraphs */
+p {
+  color: #eaeaea;
+  font-size: 12px;
+}
+
+/* Sections with retro panel feel */
 section {
-  margin-bottom: 40px;
+  margin-bottom: 24px;
+  background: #111111;
+  padding: 16px;
+  border: 2px solid #00ffcc;
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(0,255,204,0.3);
+  transition: all 0.2s ease;
+}
+
+section:hover {
+  box-shadow: 0 0 18px rgba(0,255,204,0.6);
+  transform: scale(1.01);
+}
+
+/* Code blocks styled like terminal */
+code {
+  display: block;
+  background: #222222;
+  color: #ff77ff;
+  padding: 6px;
+  border: 1px solid #ff77ff;
+  border-radius: 4px;
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+/* particles canvas overlay */
+#particles-canvas {
+  position: fixed;
+  inset: 0;                 /* top:0; left:0; right:0; bottom:0; */
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;               /* sits under nav/main (which are z-index:2) */
+  pointer-events: none;     /* don’t block clicks */
+  mix-blend-mode: screen;   /* makes particles glow nicely on dark bg */
+  opacity: 0.9;
+}
+
+/* ensure main content sits above particles (if necessary) */
+main, nav {
+  position: relative;
+  z-index: 2;
 }
